@@ -1,3 +1,5 @@
+let timer
+
 const reducer = (state = '', action) => {
     switch (action.type) {
         case 'SET_NOTE':
@@ -12,7 +14,8 @@ export const setNotification = (notification, timeout) => {
             type: 'SET_NOTE',
             data: { notification }
         })
-        setTimeout(() => dispatch({
+        clearTimeout(timer)
+        timer = setTimeout(() => dispatch({
             type: 'SET_NOTE',
             data: { notification: '' }
         }), timeout * 1000)
