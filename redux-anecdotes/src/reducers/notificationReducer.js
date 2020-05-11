@@ -6,11 +6,17 @@ const reducer = (state = '', action) => {
     }
 }
 
-export const setNotification = (notification) => {
-    return ({
-        type: 'SET_NOTE',
-        data: { notification }
-    })
+export const setNotification = (notification, timeout) => {
+    return async dispatch => {
+        dispatch({
+            type: 'SET_NOTE',
+            data: { notification }
+        })
+        setTimeout(() => dispatch({
+            type: 'SET_NOTE',
+            data: { notification: '' }
+        }), timeout * 1000)
+    }
 }
 
 export default reducer
